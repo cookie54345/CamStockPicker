@@ -1,0 +1,21 @@
+# Visual Studio / MAUI
+.vs/
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider
+.idea/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Secrets (optional)
+appsettings*.json
+.env
