@@ -4,7 +4,7 @@ namespace CamStockPicker.Models
 {
     /// <summary>
     /// Container that holds a stock quote response.
-    /// <summary>
+    /// </summary>
     public class GlobalQuoteResponse
     {
         [JsonPropertyName("Global Quote")]

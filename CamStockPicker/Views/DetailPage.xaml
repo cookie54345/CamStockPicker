@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CamStockPicker.Views.DetailPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Detail">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="14">
+
+            <!-- Header-ish area: Symbol + company -->
+            <Label Text="{Binding Symbol}" FontSize="28" FontAttributes="Bold" />
+            <Label Text="{Binding CompanyName}" TextColor="#5B6472" />
+
+            <!-- Big price -->
+            <Label Text="{Binding PriceText}" FontSize="42" FontAttributes="Bold" />
+
+            <!-- Change -->
+            <Label Text="{Binding ChangeText}"
+                   FontSize="16"
+                   TextColor="{Binding ChangeColor}" />
+
+            <!-- Buttons row -->
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12" Margin="0,6,0,0">
+                <Button Text="Refresh"
+                        CornerRadius="12"
+                        HeightRequest="50"
+                        BackgroundColor="White"
+                        BorderColor="#D9DDE5"
+                        BorderWidth="1"
+                        TextColor="Black"
+                        Command="{Binding RefreshCommand}" />
+
+                <Button Grid.Column="1"
+                        Text="Add to Watchlist"
+                        CornerRadius="12"
+                        HeightRequest="50"
+                        BackgroundColor="#2F7CF6"
+                        TextColor="White"
+                        Command="{Binding AddToWatchlistCommand}" />
+            </Grid>
+
+            <!-- Statistics card -->
+            <Frame Padding="14" CornerRadius="12" HasShadow="False" BorderColor="#D9DDE5">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Statistics" FontAttributes="Bold" TextColor="#5B6472" />
+
+                    <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="10">
+                        <Label Text="Open" TextColor="#5B6472" />
+                        <Label Grid.Column="1" Text="{Binding OpenText}" FontAttributes="Bold" />
+
+                        <Label Grid.Row="1" Text="High" TextColor="#5B6472" />
+                        <Label Grid.Row="1" Grid.Column="1" Text="{Binding HighText}" FontAttributes="Bold" />
+
+                        <Label Grid.Row="2" Text="Low" TextColor="#5B6472" />
+                        <Label Grid.Row="2" Grid.Column="1" Text="{Binding LowText}" FontAttributes="Bold" />
+
+                        <Label Grid.Row="3" Text="Prev Close" TextColor="#5B6472" />
+                        <Label Grid.Row="3" Grid.Column="1" Text="{Binding PrevCloseText}" FontAttributes="Bold" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

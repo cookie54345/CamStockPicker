@@ -2,7 +2,7 @@
 using System.Net.Http.Json;
 using CamStockPicker.Models;
 
-namespace CamstockPicker.Services
+namespace CamStockPicker.Services
 {
     /// <summary>
     /// Service class responsible for communicating with the Alpha Vantage API.
@@ -11,7 +11,7 @@ namespace CamstockPicker.Services
     {
         private readonly HttpClient _httpClient;
 
-        private const string ApiKey = "4HZDM3LSY58DOH7H";
+        private const string ApiKey = "I6GXIAVRINFPK54W";
         private const string BaseUrl = "https://www.alphavantage.co/query";
 
         /// <summary>

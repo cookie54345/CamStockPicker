@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CamStockPicker.Views.SearchPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Search">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="12">
+
+            <Label Text="Search" FontSize="28" FontAttributes="Bold" />
+
+            <!-- Search bar look -->
+            <Frame Padding="12" CornerRadius="12" HasShadow="False" BorderColor="#D9DDE5">
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10" VerticalOptions="Center">
+                    <Label Text="🔍" FontSize="18" VerticalOptions="Center" />
+                    <Entry Grid.Column="1"
+                           Placeholder="Search ticker or company"
+                           Text="{Binding Query}" />
+                </Grid>
+            </Frame>
+
+            <!-- Big Search button -->
+            <Button Text="Search"
+                    HeightRequest="54"
+                    CornerRadius="12"
+                    BackgroundColor="#2F7CF6"
+                    TextColor="White"
+                    Command="{Binding SearchCommand}" />
+
+            <Label Text="Results" TextColor="#5B6472" FontAttributes="Bold" />
+
+            <!-- Results list -->
+            <CollectionView ItemsSource="{Binding Results}"
+                            SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="14" CornerRadius="12" HasShadow="False" BorderColor="#D9DDE5" Margin="0,0,0,10">
+                            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
+                                <Label Text="{Binding Symbol}"
+                                       FontSize="18"
+                                       FontAttributes="Bold" />
+                                <Label Grid.Row="1"
+                                       Text="{Binding Name}"
+                                       TextColor="#5B6472" />
+                                <Label Grid.Column="1"
+                                       Grid.RowSpan="2"
+                                       Text="›"
+                                       FontSize="26"
+                                       TextColor="#9AA3AF"
+                                       VerticalOptions="Center" />
+
+                                <!-- Tap handler -->
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding BindingContext.OpenDetailCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                        CommandParameter="{Binding .}" />
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

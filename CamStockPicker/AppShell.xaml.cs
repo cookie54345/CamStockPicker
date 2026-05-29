@@ -1,10 +1,12 @@
-﻿namespace CamStockPicker
+﻿using CamStockPicker.Views;
+
+namespace CamStockPicker;
+
+public partial class AppShell : Shell
 {
-    public partial class AppShell : Shell
+    public AppShell()
     {
-        public AppShell()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+        Routing.RegisterRoute("detail", typeof(DetailPage));
     }
 }

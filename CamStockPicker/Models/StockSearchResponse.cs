@@ -4,7 +4,7 @@ namespace CamStockPicker.Models
 {
     /// <summary>
     /// The container for search results.
-    /// <summary>
+    /// </summary>
     public class StockSearchResponse
     {
         [JsonPropertyName("bestMatches")]

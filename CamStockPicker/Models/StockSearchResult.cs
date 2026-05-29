@@ -4,7 +4,7 @@ namespace CamStockPicker.Models
 {
     /// <summary>
     /// This class represents a single stock found in a search.
-    /// <summary>
+    /// </summary>
     public class StockSearchResult
     {
         [JsonPropertyName("1. symbol")]

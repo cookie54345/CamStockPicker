@@ -4,7 +4,7 @@ namespace CamStockPicker.Models
 {
     /// <summary>
     /// Holds the actual price data for a specific stock.
-    /// <summary>
+    /// </summary>
     public class StockQuote
     {
         [JsonPropertyName("01. symbol")]

@@ -3,12 +3,18 @@
     x:Class="CamStockPicker.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:CamStockPicker"
-    Title="CamStockPicker">
+    xmlns:views="clr-namespace:CamStockPicker.Views"
+    Shell.FlyoutBehavior="Disabled">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
-
+    <TabBar>
+        <ShellContent Title="Search"
+                      ContentTemplate="{DataTemplate views:SearchPage}"
+                      Route="search" />
+        <ShellContent Title="Watchlist"
+                      ContentTemplate="{DataTemplate views:WatchlistPage}"
+                      Route="watchlist" />
+        <ShellContent Title="Settings"
+                      ContentTemplate="{DataTemplate views:SettingsPage}"
+                      Route="settings" />
+    </TabBar>
 </Shell>
