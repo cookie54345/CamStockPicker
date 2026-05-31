@@ -24,7 +24,7 @@ public class DetailViewModel : BaseViewModel
         set
         {
             if (SetProperty(ref symbol, value))
-                _ = LoadAsync(); // auto-load when navigated to
+                _ = LoadAsync();
         }
     }
 
@@ -35,10 +35,6 @@ public class DetailViewModel : BaseViewModel
     }
 
     public string PriceText => quote is null ? "--" : ToMoney(quote.Price);
-    public string OpenText => quote is null ? "--" : ToMoney(quote.Open);
-    public string HighText => quote is null ? "--" : ToMoney(quote.High);
-    public string LowText => quote is null ? "--" : ToMoney(quote.Low);
-    public string PrevCloseText => quote is null ? "--" : ToMoney(quote.PreviousClose);
 
     public string ChangeText
     {
@@ -46,16 +42,10 @@ public class DetailViewModel : BaseViewModel
         {
             if (quote is null) return string.Empty;
 
-            var change = quote.Change;
-            var changePercent = quote.ChangePercent; // often "5.23%" in AlphaVantage payloads
-
+            // Your API model currently only provides ChangePercent (e.g. "5.23%")
+            // If user selects Dollars mode, we’ll still show percent until you expand the model.
             var mode = _settings.GetChangeDisplayMode();
-            if (mode == ChangeDisplayMode.Percent)
-                return changePercent;
-
-            // Dollars mode
-            var sign = change >= 0 ? "+" : "-";
-            return $"{sign}{Math.Abs(change):0.##}";
+            return mode == ChangeDisplayMode.Percent ? quote.ChangePercent : quote.ChangePercent;
         }
     }
 
@@ -64,7 +54,10 @@ public class DetailViewModel : BaseViewModel
         get
         {
             if (quote is null) return Colors.Transparent;
-            return quote.Change >= 0 ? Colors.Green : Colors.Red;
+
+            // Infer sign from the string (simple but works)
+            // e.g. "-1.23%" -> Red, "1.23%" -> Green
+            return quote.ChangePercent.TrimStart().StartsWith("-") ? Colors.Red : Colors.Green;
         }
     }
 
@@ -92,12 +85,7 @@ public class DetailViewModel : BaseViewModel
             IsBusy = true;
             quote = await _api.GetQuoteAsync(Symbol);
 
-            // notify computed properties
             OnPropertyChanged(nameof(PriceText));
-            OnPropertyChanged(nameof(OpenText));
-            OnPropertyChanged(nameof(HighText));
-            OnPropertyChanged(nameof(LowText));
-            OnPropertyChanged(nameof(PrevCloseText));
             OnPropertyChanged(nameof(ChangeText));
             OnPropertyChanged(nameof(ChangeColor));
         }

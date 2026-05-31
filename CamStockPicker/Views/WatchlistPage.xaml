@@ -8,12 +8,26 @@
     <Grid Padding="16" RowDefinitions="Auto,*">
         <Label Text="Watchlist" FontSize="28" FontAttributes="Bold" />
 
-        <!-- Empty state -->
+        <!-- Empty state (visible only when Items.Count == 0) -->
         <VerticalStackLayout Grid.Row="1"
                              VerticalOptions="Center"
                              HorizontalOptions="Center"
                              Spacing="10">
-            <Label Text="☆" FontSize="72" TextColor="#C7CDD6" HorizontalTextAlignment="Center" />
+            <VerticalStackLayout.Triggers>
+                <DataTrigger TargetType="VerticalStackLayout"
+                             Binding="{Binding Items.Count}"
+                             Value="0">
+                    <Setter Property="IsVisible" Value="True" />
+                </DataTrigger>
+            </VerticalStackLayout.Triggers>
+
+            <!-- default hidden, unless triggered above -->
+            <VerticalStackLayout.IsVisible>False</VerticalStackLayout.IsVisible>
+
+            <Label Text="☆"
+                   FontSize="72"
+                   TextColor="#C7CDD6"
+                   HorizontalTextAlignment="Center" />
             <Label Text="No favourites yet."
                    FontSize="16"
                    TextColor="#5B6472"
@@ -23,5 +37,44 @@
                    TextColor="#8A93A3"
                    HorizontalTextAlignment="Center" />
         </VerticalStackLayout>
+
+        <!-- List state (visible only when Items.Count > 0) -->
+        <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding Items}"
+                        SelectionMode="None">
+            <CollectionView.Triggers>
+                <DataTrigger TargetType="CollectionView"
+                             Binding="{Binding Items.Count}"
+                             Value="0">
+                    <Setter Property="IsVisible" Value="False" />
+                </DataTrigger>
+            </CollectionView.Triggers>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="14"
+                           CornerRadius="12"
+                           HasShadow="False"
+                           BorderColor="#D9DDE5"
+                           Margin="0,0,0,10">
+                        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
+                            <Label Text="{Binding Symbol}"
+                                   FontSize="18"
+                                   FontAttributes="Bold" />
+                            <Label Grid.Row="1"
+                                   Text="{Binding Name}"
+                                   TextColor="#5B6472" />
+                            <Label Grid.Column="1"
+                                   Grid.RowSpan="2"
+                                   Text="›"
+                                   FontSize="26"
+                                   TextColor="#9AA3AF"
+                                   VerticalOptions="Center" />
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
     </Grid>
 </ContentPage>

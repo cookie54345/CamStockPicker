@@ -1,10 +1,10 @@
-﻿using CamStockPicker.Viewmodels;
+﻿using CamStockPicker.ViewModels;
 
 namespace CamStockPicker.Views;
 
-public partial class DetailPage : ContentPage
+public partial class WatchlistPage : ContentPage
 {
-    public DetailPage(DetailViewModel vm)
+    public WatchlistPage(WatchlistViewModel vm)
     {
         InitializeComponent();
         BindingContext = vm;
