@@ -8,7 +8,7 @@
     <ScrollView>
         <VerticalStackLayout Padding="16" Spacing="14">
 
-            <!-- Header-ish area: Symbol + company -->
+            <!-- Header: Symbol + company -->
             <Label Text="{Binding Symbol}"
                    FontAttributes="Bold"
                    FontSize="{DynamicResource AppFontSizeTitle}" />
@@ -16,7 +16,7 @@
                    TextColor="#5B6472"
                    FontSize="{DynamicResource AppFontSize}" />
 
-            <!-- Big price -->
+            <!-- Price -->
             <Label Text="{Binding PriceText}"
                    FontAttributes="Bold"
                    FontSize="{DynamicResource AppFontSizeBig}" />
@@ -26,7 +26,7 @@
                    FontSize="{DynamicResource AppFontSize}"
                    TextColor="{Binding ChangeColor}" />
 
-            <!-- Buttons row -->
+            <!-- Refresh/Add -->
             <Grid ColumnDefinitions="*,*" ColumnSpacing="12" Margin="0,6,0,0">
                 <Button Text="Refresh"
                         CornerRadius="12"

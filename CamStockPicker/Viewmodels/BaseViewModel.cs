@@ -3,6 +3,10 @@ using System.Runtime.CompilerServices;
 
 namespace CamStockPicker.ViewModels;
 
+/// <summary>
+/// Provides a reusable base implementation for property change notification and general layout states.
+/// </summary>
+
 public abstract class BaseViewModel : INotifyPropertyChanged
 {
     bool isBusy;

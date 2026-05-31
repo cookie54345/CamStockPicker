@@ -3,6 +3,10 @@ using CamStockPicker.Services;
 
 namespace CamStockPicker.ViewModels;
 
+/// <summary>
+/// Manages configuration settings views.
+/// </summary>
+
 public class SettingsViewModel : BaseViewModel
 {
     private readonly AppSettingsStore _store;
@@ -12,7 +16,7 @@ public class SettingsViewModel : BaseViewModel
     private FontSizeMode fontMode;
     private ChangeDisplayMode changeMode;
 
-    // UI colors for “segmented” buttons
+    // UI colours for buttons
     private static readonly Color SelectedBg = Color.FromArgb("#2F7CF6");
     private static readonly Color SelectedFg = Colors.White;
     private static readonly Color UnselectedBg = Colors.White;
@@ -31,7 +35,7 @@ public class SettingsViewModel : BaseViewModel
         }
     }
 
-    // Font segment colors
+    // Font segment colours
     public Color FontSmallBg => fontMode == FontSizeMode.S ? SelectedBg : UnselectedBg;
     public Color FontSmallFg => fontMode == FontSizeMode.S ? SelectedFg : UnselectedFg;
 
@@ -74,7 +78,6 @@ public class SettingsViewModel : BaseViewModel
         SetChangeDollarsCommand = new Command(() => SetChangeMode(ChangeDisplayMode.Dollars));
         SetChangePercentCommand = new Command(() => SetChangeMode(ChangeDisplayMode.Percent));
 
-        // initial color update
         RaiseSegmentColors();
     }
 
@@ -120,7 +123,7 @@ public class SettingsViewModel : BaseViewModel
     {
         if (Application.Current?.Resources is null) return;
 
-        // Make the differences obvious for assessment
+        // Font size mode
         var baseSize = mode switch
         {
             FontSizeMode.S => 12d,

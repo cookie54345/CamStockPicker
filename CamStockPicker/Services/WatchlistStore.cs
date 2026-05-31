@@ -3,6 +3,10 @@ using CamStockPicker.Models;
 
 namespace CamStockPicker.Services;
 
+/// <summary>
+/// Handles persistent storage routines for saved stock favorites.
+/// </summary>
+
 public class WatchlistStore
 {
     private const string Key = "watchlist_v1";

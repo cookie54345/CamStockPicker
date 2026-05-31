@@ -3,6 +3,11 @@
 public enum FontSizeMode { S, M, L }
 public enum ChangeDisplayMode { Dollars, Percent }
 
+/// <summary>
+/// Manages local storage and retrieval.
+/// This includes dark mode settings, visual text sizes, and pricing metric.
+/// </summary>
+
 public class AppSettingsStore
 {
     private const string DarkKey = "settings_dark";

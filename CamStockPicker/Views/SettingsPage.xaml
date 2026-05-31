@@ -3,106 +3,157 @@
     x:Class="CamStockPicker.Views.SettingsPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="Settings">
+    xmlns:vm="clr-namespace:CamStockPicker.ViewModels"
+    x:DataType="vm:SettingsViewModel"
+    Title="Settings"
+    BackgroundColor="{AppThemeBinding Light=#F5F7FA, Dark=#121212}">
 
     <ScrollView>
-        <VerticalStackLayout Padding="16" Spacing="14">
+        <VerticalStackLayout Padding="24" Spacing="24">
 
+            <!-- Main Title -->
             <Label Text="Settings"
                    FontAttributes="Bold"
-                   FontSize="{DynamicResource AppFontSizeTitle}" />
+                   FontSize="{DynamicResource AppFontSizeTitle}"
+                   TextColor="{AppThemeBinding Light=#111827, Dark=#FFFFFF}"
+                   Margin="4,0,0,8" />
 
-            <!-- Appearance card -->
-            <Frame Padding="14" CornerRadius="12" HasShadow="False" BorderColor="#D9DDE5">
-                <VerticalStackLayout Spacing="12">
-                    <Label Text="Appearance"
-                           FontAttributes="Bold"
-                           TextColor="#5B6472"
-                           FontSize="{DynamicResource AppFontSize}" />
+            <!-- Appearance section -->
+            <VerticalStackLayout Spacing="8">
+                <Label Text="Appearance"
+                       FontAttributes="Bold"
+                       TextColor="#2F7CF6"
+                       FontSize="{DynamicResource AppFontSize}"
+                       CharacterSpacing="0.5"
+                       Margin="4,0,0,4" />
 
-                    <Grid ColumnDefinitions="*,Auto">
-                        <Label Text="Dark Mode"
-                               VerticalOptions="Center"
+                <Frame Padding="20" 
+                       CornerRadius="16" 
+                       HasShadow="True" 
+                       BorderColor="{AppThemeBinding Light=#E5E7EB, Dark=#2C2C2C}" 
+                       BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}">
+                    <Frame.Shadow>
+                        <Shadow Brush="#000000" Opacity="{AppThemeBinding Light=0.06, Dark=0.2}" Radius="12" Offset="0,4"/>
+                    </Frame.Shadow>
+
+                    <VerticalStackLayout Spacing="16">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <VerticalStackLayout Spacing="2">
+                                <Label Text="Dark Mode"
+                                       FontAttributes="Bold"
+                                       TextColor="{AppThemeBinding Light=#111827, Dark=#FFFFFF}"
+                                       FontSize="{DynamicResource AppFontSize}" />
+                                <Label Text="Toggle application theme"
+                                       TextColor="{AppThemeBinding Light=#6B7280, Dark=#A0A0A0}"
+                                       FontSize="{DynamicResource AppFontSize}" />
+                            </VerticalStackLayout>
+                            <Switch Grid.Column="1"
+                                    IsToggled="{Binding IsDarkMode}"
+                                    ThumbColor="{AppThemeBinding Light=White, Dark=#FFFFFF}"
+                                    OnColor="#3B82F6" />
+                        </Grid>
+
+                        <BoxView HeightRequest="1" BackgroundColor="{AppThemeBinding Light=#F3F4F6, Dark=#2C2C2C}" />
+
+                        <VerticalStackLayout Spacing="10">
+                            <Label Text="Font Size"
+                                   FontAttributes="Bold"
+                                   TextColor="{AppThemeBinding Light=#111827, Dark=#FFFFFF}"
+                                   FontSize="{DynamicResource AppFontSize}" />
+
+                            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
+                                <Button Text="S"
+                                        CornerRadius="10"
+                                        HeightRequest="48"
+                                        FontAttributes="Bold"
+                                        FontSize="{DynamicResource AppFontSize}"
+                                        Command="{Binding SetFontSmallCommand}"
+                                        BackgroundColor="{Binding FontSmallBg}"
+                                        TextColor="{Binding FontSmallFg}"
+                                        BorderColor="{AppThemeBinding Light=#E5E7EB, Dark=#444444}"
+                                        BorderWidth="1" />
+                                <Button Grid.Column="1"
+                                        Text="M"
+                                        CornerRadius="10"
+                                        HeightRequest="48"
+                                        FontAttributes="Bold"
+                                        FontSize="{DynamicResource AppFontSize}"
+                                        Command="{Binding SetFontMediumCommand}"
+                                        BackgroundColor="{Binding FontMediumBg}"
+                                        TextColor="{Binding FontMediumFg}"
+                                        BorderColor="{AppThemeBinding Light=#E5E7EB, Dark=#444444}"
+                                        BorderWidth="1" />
+                                <Button Grid.Column="2"
+                                        Text="L"
+                                        CornerRadius="10"
+                                        HeightRequest="48"
+                                        FontAttributes="Bold"
+                                        FontSize="{DynamicResource AppFontSize}"
+                                        Command="{Binding SetFontLargeCommand}"
+                                        BackgroundColor="{Binding FontLargeBg}"
+                                        TextColor="{Binding FontLargeFg}"
+                                        BorderColor="{AppThemeBinding Light=#E5E7EB, Dark=#444444}"
+                                        BorderWidth="1" />
+                            </Grid>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Frame>
+            </VerticalStackLayout>
+
+            <!-- Quote section -->
+            <VerticalStackLayout Spacing="8">
+                <Label Text="Quote Display"
+                       FontAttributes="Bold"
+                       TextColor="#2F7CF6"
+                       FontSize="{DynamicResource AppFontSize}"
+                       CharacterSpacing="0.5"
+                       Margin="4,0,0,4" />
+
+                <Frame Padding="20" 
+                       CornerRadius="16" 
+                       HasShadow="True" 
+                       BorderColor="{AppThemeBinding Light=#E5E7EB, Dark=#2C2C2C}" 
+                       BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}">
+                    <Frame.Shadow>
+                        <Shadow Brush="#000000" Opacity="{AppThemeBinding Light=0.06, Dark=0.2}" Radius="12" Offset="0,4"/>
+                    </Frame.Shadow>
+
+                    <VerticalStackLayout Spacing="16">
+                        <Label Text="Change Display Mode"
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#111827, Dark=#FFFFFF}"
                                FontSize="{DynamicResource AppFontSize}" />
-                        <Switch Grid.Column="1"
-                                IsToggled="{Binding IsDarkMode}" />
-                    </Grid>
 
-                    <Label Text="Font Size"
-                           TextColor="#5B6472"
-                           FontSize="{DynamicResource AppFontSize}" />
+                        <Grid ColumnDefinitions="*, *" ColumnSpacing="10">
+                            <Button Text="Absolute ($)"
+                                    CornerRadius="10"
+                                    HeightRequest="48"
+                                    FontAttributes="Bold"
+                                    FontSize="{DynamicResource AppFontSize}"
+                                    Command="{Binding SetChangeDollarsCommand}"
+                                    BackgroundColor="{Binding DollarsBg}"
+                                    TextColor="{Binding DollarsFg}"
+                                    BorderColor="{AppThemeBinding Light=#E5E7EB, Dark=#444444}"
+                                    BorderWidth="1" />
+                            <Button Grid.Column="1"
+                                    Text="Percentage (%)"
+                                    CornerRadius="10"
+                                    HeightRequest="48"
+                                    FontAttributes="Bold"
+                                    FontSize="{DynamicResource AppFontSize}"
+                                    Command="{Binding SetChangePercentCommand}"
+                                    BackgroundColor="{Binding PercentBg}"
+                                    TextColor="{Binding PercentFg}"
+                                    BorderColor="{AppThemeBinding Light=#E5E7EB, Dark=#444444}"
+                                    BorderWidth="1" />
+                        </Grid>
 
-                    <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
-                        <Button Text="S"
-                                CornerRadius="12"
-                                HeightRequest="48"
-                                FontSize="{DynamicResource AppFontSize}"
-                                Command="{Binding SetFontSmallCommand}"
-                                BackgroundColor="{Binding FontSmallBg}"
-                                TextColor="{Binding FontSmallFg}"
-                                BorderColor="#D9DDE5"
-                                BorderWidth="1" />
-                        <Button Grid.Column="1"
-                                Text="M"
-                                CornerRadius="12"
-                                HeightRequest="48"
-                                FontSize="{DynamicResource AppFontSize}"
-                                Command="{Binding SetFontMediumCommand}"
-                                BackgroundColor="{Binding FontMediumBg}"
-                                TextColor="{Binding FontMediumFg}"
-                                BorderColor="#D9DDE5"
-                                BorderWidth="1" />
-                        <Button Grid.Column="2"
-                                Text="L"
-                                CornerRadius="12"
-                                HeightRequest="48"
-                                FontSize="{DynamicResource AppFontSize}"
-                                Command="{Binding SetFontLargeCommand}"
-                                BackgroundColor="{Binding FontLargeBg}"
-                                TextColor="{Binding FontLargeFg}"
-                                BorderColor="#D9DDE5"
-                                BorderWidth="1" />
-                    </Grid>
-                </VerticalStackLayout>
-            </Frame>
-
-            <!-- Quote display card -->
-            <Frame Padding="14" CornerRadius="12" HasShadow="False" BorderColor="#D9DDE5">
-                <VerticalStackLayout Spacing="12">
-                    <Label Text="Quote Display"
-                           FontAttributes="Bold"
-                           TextColor="#5B6472"
-                           FontSize="{DynamicResource AppFontSize}" />
-                    <Label Text="Change Display Mode"
-                           FontSize="{DynamicResource AppFontSize}" />
-
-                    <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
-                        <Button Text="$"
-                                CornerRadius="12"
-                                HeightRequest="48"
-                                FontSize="{DynamicResource AppFontSize}"
-                                Command="{Binding SetChangeDollarsCommand}"
-                                BackgroundColor="{Binding DollarsBg}"
-                                TextColor="{Binding DollarsFg}"
-                                BorderColor="#D9DDE5"
-                                BorderWidth="1" />
-                        <Button Grid.Column="1"
-                                Text="%"
-                                CornerRadius="12"
-                                HeightRequest="48"
-                                FontSize="{DynamicResource AppFontSize}"
-                                Command="{Binding SetChangePercentCommand}"
-                                BackgroundColor="{Binding PercentBg}"
-                                TextColor="{Binding PercentFg}"
-                                BorderColor="#D9DDE5"
-                                BorderWidth="1" />
-                    </Grid>
-
-                    <Label Text="Choose how price changes are displayed on the Detail screen"
-                           FontSize="{DynamicResource AppFontSize}"
-                           TextColor="#8A93A3" />
-                </VerticalStackLayout>
-            </Frame>
+                        <Label Text="Choose how price changes are displayed on the Detail screen."
+                               FontSize="{DynamicResource AppFontSize}"
+                               TextColor="{AppThemeBinding Light=#6B7280, Dark=#A0A0A0}" />
+                    </VerticalStackLayout>
+                </Frame>
+            </VerticalStackLayout>
 
         </VerticalStackLayout>
     </ScrollView>

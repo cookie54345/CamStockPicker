@@ -5,15 +5,25 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="Search">
 
+    <!-- Scroll Context Wrapper -->
     <ScrollView>
         <VerticalStackLayout Padding="16" Spacing="12">
 
+            <!-- Main Title -->
             <Label Text="Search"
                    FontAttributes="Bold"
                    FontSize="{DynamicResource AppFontSizeTitle}" />
 
-            <!-- Search bar look -->
-            <Frame Padding="12" CornerRadius="12" HasShadow="False" BorderColor="#D9DDE5">
+            <!-- Search Field Container -->
+            <Frame Padding="12" 
+                   CornerRadius="12" 
+                   HasShadow="True" 
+                   BorderColor="{AppThemeBinding Light=#D9DDE5, Dark=#2C2C2C}"
+                   BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}">
+                <Frame.Shadow>
+                    <Shadow Brush="#000000" Opacity="{AppThemeBinding Light=0.06, Dark=0.2}" Radius="8" Offset="0,2"/>
+                </Frame.Shadow>
+
                 <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10" VerticalOptions="Center">
                     <Label Text="🔍"
                            FontSize="{DynamicResource AppFontSize}"
@@ -25,7 +35,7 @@
                 </Grid>
             </Frame>
 
-            <!-- Big Search button -->
+            <!-- Search Button -->
             <Button Text="Search"
                     HeightRequest="54"
                     CornerRadius="12"
@@ -34,17 +44,27 @@
                     FontSize="{DynamicResource AppFontSize}"
                     Command="{Binding SearchCommand}" />
 
+            <!-- Results Label -->
             <Label Text="Results"
                    TextColor="#5B6472"
                    FontAttributes="Bold"
                    FontSize="{DynamicResource AppFontSize}" />
 
-            <!-- Results list -->
+            <!-- Search Results Display Engine -->
             <CollectionView ItemsSource="{Binding Results}"
                             SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame Padding="14" CornerRadius="12" HasShadow="False" BorderColor="#D9DDE5" Margin="0,0,0,10">
+                        <Frame Padding="14" 
+                               CornerRadius="12" 
+                               HasShadow="True" 
+                               BorderColor="{AppThemeBinding Light=#D9DDE5, Dark=#2C2C2C}"
+                               BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
+                               Margin="0,0,0,10">
+                            <Frame.Shadow>
+                                <Shadow Brush="#000000" Opacity="{AppThemeBinding Light=0.06, Dark=0.2}" Radius="8" Offset="0,2"/>
+                            </Frame.Shadow>
+
                             <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
                                 <Label Text="{Binding Symbol}"
                                        FontAttributes="Bold"
@@ -60,7 +80,6 @@
                                        TextColor="#9AA3AF"
                                        VerticalOptions="Center" />
 
-                                <!-- Tap handler -->
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer
                                         Command="{Binding BindingContext.OpenDetailCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"

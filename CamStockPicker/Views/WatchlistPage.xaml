@@ -6,11 +6,11 @@
     Title="Watchlist">
 
     <Grid Padding="16" RowDefinitions="Auto,*">
+        <!-- Main Title -->
         <Label Text="Watchlist"
                FontAttributes="Bold"
                FontSize="{DynamicResource AppFontSizeTitle}" />
 
-        <!-- Empty state (visible only when Items.Count == 0) -->
         <VerticalStackLayout Grid.Row="1"
                              VerticalOptions="Center"
                              HorizontalOptions="Center"
@@ -23,7 +23,6 @@
                 </DataTrigger>
             </VerticalStackLayout.Triggers>
 
-            <!-- default hidden, unless triggered above -->
             <VerticalStackLayout.IsVisible>False</VerticalStackLayout.IsVisible>
 
             <Label Text="☆"
@@ -40,7 +39,7 @@
                    HorizontalTextAlignment="Center" />
         </VerticalStackLayout>
 
-        <!-- List state (visible only when Items.Count > 0) -->
+        <!-- Active List View -->
         <CollectionView Grid.Row="1"
                         ItemsSource="{Binding Items}"
                         SelectionMode="None">
@@ -56,9 +55,14 @@
                 <DataTemplate>
                     <Frame Padding="14"
                            CornerRadius="12"
-                           HasShadow="False"
-                           BorderColor="#D9DDE5"
+                           HasShadow="True"
+                           BorderColor="{AppThemeBinding Light=#D9DDE5, Dark=#2C2C2C}"
+                           BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
                            Margin="0,0,0,10">
+                        <Frame.Shadow>
+                            <Shadow Brush="#000000" Opacity="{AppThemeBinding Light=0.06, Dark=0.2}" Radius="8" Offset="0,2"/>
+                        </Frame.Shadow>
+
                         <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
                             <Label Text="{Binding Symbol}"
                                    FontAttributes="Bold"

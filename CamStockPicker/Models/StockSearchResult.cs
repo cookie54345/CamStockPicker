@@ -2,9 +2,11 @@
 
 namespace CamStockPicker.Models
 {
+    /// <summary>
+    /// Represents an individual stock match found during a search query.
+    /// </summary>
     public class StockSearchResult
     {
-        // AlphaVantage search often uses these keys (with leading zeros).
         [JsonPropertyName("01. symbol")]
         public string Symbol { get; set; } = string.Empty;
 

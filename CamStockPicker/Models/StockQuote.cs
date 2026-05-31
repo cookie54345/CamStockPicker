@@ -3,7 +3,7 @@
 namespace CamStockPicker.Models
 {
     /// <summary>
-    /// Holds the actual price data for a specific stock (Alpha Vantage GLOBAL_QUOTE).
+    /// Holds the price data for a specific stock.
     /// </summary>
     public class StockQuote
     {

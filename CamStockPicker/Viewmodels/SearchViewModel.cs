@@ -5,6 +5,10 @@ using CamStockPicker.Services;
 
 namespace CamStockPicker.ViewModels;
 
+/// <summary>
+/// Handles search query entries.
+/// </summary>
+
 public class SearchViewModel : BaseViewModel
 {
     private readonly AlphaAPI _api;

@@ -5,6 +5,10 @@ using CamStockPicker.Services;
 
 namespace CamStockPicker.ViewModels;
 
+/// <summary>
+/// Controls the localised data bindings for favoured assets.
+/// </summary>
+
 public class WatchlistViewModel : BaseViewModel
 {
     private readonly WatchlistStore _store;
