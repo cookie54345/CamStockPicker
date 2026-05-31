@@ -123,16 +123,14 @@ public class SettingsViewModel : BaseViewModel
         // Make the differences obvious for assessment
         var baseSize = mode switch
         {
-            FontSizeMode.S => 14d,
+            FontSizeMode.S => 12d,
             FontSizeMode.M => 16d,
-            FontSizeMode.L => 20d,
+            FontSizeMode.L => 28d,
             _ => 16d
         };
 
-        // These keys must exist in App.xaml (as x:Double resources),
-        // but we can also overwrite/create them here safely.
         Application.Current.Resources["AppFontSize"] = baseSize;
-        Application.Current.Resources["AppFontSizeTitle"] = baseSize + 12; // 26 / 28 / 32
-        Application.Current.Resources["AppFontSizeBig"] = baseSize + 26;   // 40 / 42 / 46
+        Application.Current.Resources["AppFontSizeTitle"] = baseSize + 14; // 26 / 30 / 42
+        Application.Current.Resources["AppFontSizeBig"] = baseSize + 30;   // 42 / 46 / 58
     }
 }

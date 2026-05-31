@@ -6,7 +6,9 @@
     Title="Watchlist">
 
     <Grid Padding="16" RowDefinitions="Auto,*">
-        <Label Text="Watchlist" FontSize="28" FontAttributes="Bold" />
+        <Label Text="Watchlist"
+               FontAttributes="Bold"
+               FontSize="{DynamicResource AppFontSizeTitle}" />
 
         <!-- Empty state (visible only when Items.Count == 0) -->
         <VerticalStackLayout Grid.Row="1"
@@ -25,15 +27,15 @@
             <VerticalStackLayout.IsVisible>False</VerticalStackLayout.IsVisible>
 
             <Label Text="☆"
-                   FontSize="72"
+                   FontSize="{DynamicResource AppFontSizeBig}"
                    TextColor="#C7CDD6"
                    HorizontalTextAlignment="Center" />
             <Label Text="No favourites yet."
-                   FontSize="16"
+                   FontSize="{DynamicResource AppFontSize}"
                    TextColor="#5B6472"
                    HorizontalTextAlignment="Center" />
             <Label Text="Add from Detail screen."
-                   FontSize="14"
+                   FontSize="{DynamicResource AppFontSize}"
                    TextColor="#8A93A3"
                    HorizontalTextAlignment="Center" />
         </VerticalStackLayout>
@@ -59,15 +61,16 @@
                            Margin="0,0,0,10">
                         <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
                             <Label Text="{Binding Symbol}"
-                                   FontSize="18"
-                                   FontAttributes="Bold" />
+                                   FontAttributes="Bold"
+                                   FontSize="{DynamicResource AppFontSize}" />
                             <Label Grid.Row="1"
                                    Text="{Binding Name}"
-                                   TextColor="#5B6472" />
+                                   TextColor="#5B6472"
+                                   FontSize="{DynamicResource AppFontSize}" />
                             <Label Grid.Column="1"
                                    Grid.RowSpan="2"
                                    Text="›"
-                                   FontSize="26"
+                                   FontSize="{DynamicResource AppFontSizeTitle}"
                                    TextColor="#9AA3AF"
                                    VerticalOptions="Center" />
                         </Grid>

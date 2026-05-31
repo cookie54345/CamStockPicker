@@ -36,16 +36,37 @@ public class DetailViewModel : BaseViewModel
 
     public string PriceText => quote is null ? "--" : ToMoney(quote.Price);
 
+    // Statistics texts (now backed by StockQuote fields)
+    public string OpenText => quote is null ? "--" : ToMoney(quote.Open);
+    public string HighText => quote is null ? "--" : ToMoney(quote.High);
+    public string LowText => quote is null ? "--" : ToMoney(quote.Low);
+    public string PrevCloseText => quote is null ? "--" : ToMoney(quote.PreviousClose);
+
     public string ChangeText
     {
         get
         {
             if (quote is null) return string.Empty;
 
-            // Your API model currently only provides ChangePercent (e.g. "5.23%")
-            // If user selects Dollars mode, we’ll still show percent until you expand the model.
             var mode = _settings.GetChangeDisplayMode();
-            return mode == ChangeDisplayMode.Percent ? quote.ChangePercent : quote.ChangePercent;
+
+            // quote.ChangePercent looks like "1.23%" or "-0.83%"
+            var pct = TryParsePercent(quote.ChangePercent); // decimal fraction, e.g. 0.0123
+
+            if (mode == ChangeDisplayMode.Percent)
+            {
+                // Keep it consistent even if API formatting varies
+                return pct is null ? quote.ChangePercent : $"{pct.Value:+0.##%;-0.##%;0%}";
+            }
+
+            // Dollars mode: approximate $ change from Price * percent
+            if (pct is null) return string.Empty;
+
+            if (!double.TryParse(quote.Price, NumberStyles.Any, CultureInfo.InvariantCulture, out var price))
+                return string.Empty;
+
+            var change = price * pct.Value;
+            return change.ToString("+#,##0.00;-#,##0.00;0.00", CultureInfo.InvariantCulture);
         }
     }
 
@@ -55,9 +76,11 @@ public class DetailViewModel : BaseViewModel
         {
             if (quote is null) return Colors.Transparent;
 
-            // Infer sign from the string (simple but works)
-            // e.g. "-1.23%" -> Red, "1.23%" -> Green
-            return quote.ChangePercent.TrimStart().StartsWith("-") ? Colors.Red : Colors.Green;
+            var pct = TryParsePercent(quote.ChangePercent);
+            if (pct is null)
+                return quote.ChangePercent.TrimStart().StartsWith("-") ? Colors.Red : Colors.Green;
+
+            return pct.Value < 0 ? Colors.Red : Colors.Green;
         }
     }
 
@@ -88,6 +111,12 @@ public class DetailViewModel : BaseViewModel
             OnPropertyChanged(nameof(PriceText));
             OnPropertyChanged(nameof(ChangeText));
             OnPropertyChanged(nameof(ChangeColor));
+
+            // statistics
+            OnPropertyChanged(nameof(OpenText));
+            OnPropertyChanged(nameof(HighText));
+            OnPropertyChanged(nameof(LowText));
+            OnPropertyChanged(nameof(PrevCloseText));
         }
         finally
         {
@@ -112,5 +141,17 @@ public class DetailViewModel : BaseViewModel
             return d.ToString("C2", CultureInfo.GetCultureInfo("en-US"));
 
         return "--";
+    }
+
+    private static double? TryParsePercent(string? text)
+    {
+        if (string.IsNullOrWhiteSpace(text)) return null;
+
+        // "1.23%" -> 0.0123
+        var cleaned = text.Trim().Replace("%", "");
+        if (!double.TryParse(cleaned, NumberStyles.Any, CultureInfo.InvariantCulture, out var pct))
+            return null;
+
+        return pct / 100.0;
     }
 }

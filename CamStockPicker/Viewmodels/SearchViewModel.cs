@@ -44,11 +44,18 @@ public class SearchViewModel : BaseViewModel
         try
         {
             IsBusy = true;
+            (SearchCommand as Command)?.ChangeCanExecute(); // <-- add
+
             Results.Clear();
 
             var matches = await _api.SearchStocksAsync(Query);
             foreach (var m in matches)
                 Results.Add(m);
+        }
+        catch (Exception ex)
+        {
+            // so you can see failures in Output window
+            System.Diagnostics.Debug.WriteLine($"[SearchViewModel] Search failed: {ex}");
         }
         finally
         {
@@ -61,7 +68,6 @@ public class SearchViewModel : BaseViewModel
     {
         if (item is null) return;
 
-        // pass symbol + name to detail via query string
         await Shell.Current.GoToAsync(
             $"detail?symbol={Uri.EscapeDataString(item.Symbol)}&name={Uri.EscapeDataString(item.Name)}");
     }
