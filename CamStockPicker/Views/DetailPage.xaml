@@ -9,15 +9,21 @@
         <VerticalStackLayout Padding="16" Spacing="14">
 
             <!-- Header-ish area: Symbol + company -->
-            <Label Text="{Binding Symbol}" FontSize="28" FontAttributes="Bold" />
-            <Label Text="{Binding CompanyName}" TextColor="#5B6472" />
+            <Label Text="{Binding Symbol}"
+                   FontAttributes="Bold"
+                   FontSize="{DynamicResource AppFontSizeTitle}" />
+            <Label Text="{Binding CompanyName}"
+                   TextColor="#5B6472"
+                   FontSize="{DynamicResource AppFontSize}" />
 
             <!-- Big price -->
-            <Label Text="{Binding PriceText}" FontSize="42" FontAttributes="Bold" />
+            <Label Text="{Binding PriceText}"
+                   FontAttributes="Bold"
+                   FontSize="{DynamicResource AppFontSizeBig}" />
 
             <!-- Change -->
             <Label Text="{Binding ChangeText}"
-                   FontSize="16"
+                   FontSize="{DynamicResource AppFontSize}"
                    TextColor="{Binding ChangeColor}" />
 
             <!-- Buttons row -->
@@ -29,6 +35,7 @@
                         BorderColor="#D9DDE5"
                         BorderWidth="1"
                         TextColor="Black"
+                        FontSize="{DynamicResource AppFontSize}"
                         Command="{Binding RefreshCommand}" />
 
                 <Button Grid.Column="1"
@@ -37,26 +44,58 @@
                         HeightRequest="50"
                         BackgroundColor="#2F7CF6"
                         TextColor="White"
+                        FontSize="{DynamicResource AppFontSize}"
                         Command="{Binding AddToWatchlistCommand}" />
             </Grid>
 
             <!-- Statistics card -->
             <Frame Padding="14" CornerRadius="12" HasShadow="False" BorderColor="#D9DDE5">
                 <VerticalStackLayout Spacing="10">
-                    <Label Text="Statistics" FontAttributes="Bold" TextColor="#5B6472" />
+                    <Label Text="Statistics"
+                           FontAttributes="Bold"
+                           TextColor="#5B6472"
+                           FontSize="{DynamicResource AppFontSize}" />
 
-                    <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="10">
-                        <Label Text="Open" TextColor="#5B6472" />
-                        <Label Grid.Column="1" Text="{Binding OpenText}" FontAttributes="Bold" />
+                    <Grid ColumnDefinitions="*,Auto"
+                          RowDefinitions="Auto,Auto,Auto,Auto"
+                          RowSpacing="10">
+                        <Label Text="Open"
+                               TextColor="#5B6472"
+                               FontSize="{DynamicResource AppFontSize}" />
+                        <Label Grid.Column="1"
+                               Text="{Binding OpenText}"
+                               FontAttributes="Bold"
+                               FontSize="{DynamicResource AppFontSize}" />
 
-                        <Label Grid.Row="1" Text="High" TextColor="#5B6472" />
-                        <Label Grid.Row="1" Grid.Column="1" Text="{Binding HighText}" FontAttributes="Bold" />
+                        <Label Grid.Row="1"
+                               Text="High"
+                               TextColor="#5B6472"
+                               FontSize="{DynamicResource AppFontSize}" />
+                        <Label Grid.Row="1"
+                               Grid.Column="1"
+                               Text="{Binding HighText}"
+                               FontAttributes="Bold"
+                               FontSize="{DynamicResource AppFontSize}" />
 
-                        <Label Grid.Row="2" Text="Low" TextColor="#5B6472" />
-                        <Label Grid.Row="2" Grid.Column="1" Text="{Binding LowText}" FontAttributes="Bold" />
+                        <Label Grid.Row="2"
+                               Text="Low"
+                               TextColor="#5B6472"
+                               FontSize="{DynamicResource AppFontSize}" />
+                        <Label Grid.Row="2"
+                               Grid.Column="1"
+                               Text="{Binding LowText}"
+                               FontAttributes="Bold"
+                               FontSize="{DynamicResource AppFontSize}" />
 
-                        <Label Grid.Row="3" Text="Prev Close" TextColor="#5B6472" />
-                        <Label Grid.Row="3" Grid.Column="1" Text="{Binding PrevCloseText}" FontAttributes="Bold" />
+                        <Label Grid.Row="3"
+                               Text="Prev Close"
+                               TextColor="#5B6472"
+                               FontSize="{DynamicResource AppFontSize}" />
+                        <Label Grid.Row="3"
+                               Grid.Column="1"
+                               Text="{Binding PrevCloseText}"
+                               FontAttributes="Bold"
+                               FontSize="{DynamicResource AppFontSize}" />
                     </Grid>
                 </VerticalStackLayout>
             </Frame>

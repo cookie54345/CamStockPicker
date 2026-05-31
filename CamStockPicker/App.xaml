@@ -5,10 +5,17 @@
              x:Class="CamStockPicker.App">
     <Application.Resources>
         <ResourceDictionary>
+
+            <!-- Global font sizes (used with DynamicResource so changes apply live) -->
+            <x:Double x:Key="AppFontSize">16</x:Double>
+            <x:Double x:Key="AppFontSizeTitle">28</x:Double>
+            <x:Double x:Key="AppFontSizeBig">42</x:Double>
+
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

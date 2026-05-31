@@ -65,6 +65,7 @@ public class SettingsViewModel : BaseViewModel
         changeMode = _store.GetChangeDisplayMode();
 
         ApplyTheme(isDarkMode);
+        ApplyFont(fontMode);
 
         SetFontSmallCommand = new Command(() => SetFont(FontSizeMode.S));
         SetFontMediumCommand = new Command(() => SetFont(FontSizeMode.M));
@@ -81,8 +82,10 @@ public class SettingsViewModel : BaseViewModel
     {
         fontMode = mode;
         _store.SetFontSizeMode(mode);
+
+        ApplyFont(mode);
+
         RaiseSegmentColors();
-        // (optional) apply a global font scale later
     }
 
     private void SetChangeMode(ChangeDisplayMode mode)
@@ -111,5 +114,25 @@ public class SettingsViewModel : BaseViewModel
     {
         if (Application.Current is null) return;
         Application.Current.UserAppTheme = dark ? AppTheme.Dark : AppTheme.Light;
+    }
+
+    private static void ApplyFont(FontSizeMode mode)
+    {
+        if (Application.Current?.Resources is null) return;
+
+        // Make the differences obvious for assessment
+        var baseSize = mode switch
+        {
+            FontSizeMode.S => 14d,
+            FontSizeMode.M => 16d,
+            FontSizeMode.L => 20d,
+            _ => 16d
+        };
+
+        // These keys must exist in App.xaml (as x:Double resources),
+        // but we can also overwrite/create them here safely.
+        Application.Current.Resources["AppFontSize"] = baseSize;
+        Application.Current.Resources["AppFontSizeTitle"] = baseSize + 12; // 26 / 28 / 32
+        Application.Current.Resources["AppFontSizeBig"] = baseSize + 26;   // 40 / 42 / 46
     }
 }
