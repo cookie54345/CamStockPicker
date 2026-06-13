@@ -8,7 +8,6 @@ namespace CamStockPicker.ViewModels;
 /// <summary>
 /// Controls the localised data bindings for favoured assets.
 /// </summary>
-
 public class WatchlistViewModel : BaseViewModel
 {
     private readonly WatchlistStore _store;
@@ -16,6 +15,7 @@ public class WatchlistViewModel : BaseViewModel
     public ObservableCollection<WatchlistItem> Items { get; } = new();
 
     public ICommand RefreshCommand { get; }
+    public ICommand OpenDetailCommand { get; }
 
     public WatchlistViewModel(WatchlistStore store)
     {
@@ -23,6 +23,8 @@ public class WatchlistViewModel : BaseViewModel
         _store = store;
 
         RefreshCommand = new Command(Load);
+        OpenDetailCommand = new Command<WatchlistItem>(async item => await OpenDetailAsync(item));
+
         Load();
     }
 
@@ -31,5 +33,13 @@ public class WatchlistViewModel : BaseViewModel
         Items.Clear();
         foreach (var item in _store.Load())
             Items.Add(item);
+    }
+
+    private async Task OpenDetailAsync(WatchlistItem? item)
+    {
+        if (item is null) return;
+
+        await Shell.Current.GoToAsync(
+            $"detail?symbol={Uri.EscapeDataString(item.Symbol)}&name={Uri.EscapeDataString(item.Name)}");
     }
 }

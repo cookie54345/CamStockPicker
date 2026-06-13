@@ -9,4 +9,12 @@ public partial class WatchlistPage : ContentPage
         InitializeComponent();
         BindingContext = vm;
     }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        if (BindingContext is WatchlistViewModel vm)
+            vm.RefreshCommand.Execute(null);
+    }
 }
