@@ -5,37 +5,40 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="Search">
 
-    <!-- Scroll Context Wrapper -->
     <ScrollView>
         <VerticalStackLayout Padding="16" Spacing="12">
 
-            <!-- Main Title -->
             <Label Text="Search"
                    FontAttributes="Bold"
-                   FontSize="{DynamicResource AppFontSizeTitle}" />
+                   FontSize="{DynamicResource AppFontSizeTitle}"
+                   TextColor="{AppThemeBinding Light=#111111, Dark=#FFFFFF}" />
 
-            <!-- Search Field Container -->
-            <Frame Padding="12" 
-                   CornerRadius="12" 
-                   HasShadow="True" 
+            <Frame Padding="12"
+                   CornerRadius="12"
+                   HasShadow="True"
                    BorderColor="{AppThemeBinding Light=#D9DDE5, Dark=#2C2C2C}"
                    BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}">
                 <Frame.Shadow>
-                    <Shadow Brush="#000000" Opacity="{AppThemeBinding Light=0.06, Dark=0.2}" Radius="8" Offset="0,2"/>
+                    <Shadow Brush="#000000"
+                            Opacity="{AppThemeBinding Light=0.06, Dark=0.2}"
+                            Radius="8"
+                            Offset="0,2"/>
                 </Frame.Shadow>
 
                 <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10" VerticalOptions="Center">
                     <Label Text="🔍"
                            FontSize="{DynamicResource AppFontSize}"
-                           VerticalOptions="Center" />
+                           VerticalOptions="Center"
+                           TextColor="{AppThemeBinding Light=#111111, Dark=#FFFFFF}" />
                     <Entry Grid.Column="1"
                            Placeholder="Search ticker or company"
                            FontSize="{DynamicResource AppFontSize}"
-                           Text="{Binding Query}" />
+                           Text="{Binding Query}"
+                           TextColor="{AppThemeBinding Light=#111111, Dark=#FFFFFF}"
+                           PlaceholderColor="{AppThemeBinding Light=#8A93A3, Dark=#6B7280}" />
                 </Grid>
             </Frame>
 
-            <!-- Search Button -->
             <Button Text="Search"
                     HeightRequest="54"
                     CornerRadius="12"
@@ -44,40 +47,42 @@
                     FontSize="{DynamicResource AppFontSize}"
                     Command="{Binding SearchCommand}" />
 
-            <!-- Results Label -->
             <Label Text="Results"
-                   TextColor="#5B6472"
+                   TextColor="{AppThemeBinding Light=#5B6472, Dark=#AAB2C0}"
                    FontAttributes="Bold"
                    FontSize="{DynamicResource AppFontSize}" />
 
-            <!-- Search Results Display Engine -->
             <CollectionView ItemsSource="{Binding Results}"
                             SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame Padding="14" 
-                               CornerRadius="12" 
-                               HasShadow="True" 
+                        <Frame Padding="14"
+                               CornerRadius="12"
+                               HasShadow="True"
                                BorderColor="{AppThemeBinding Light=#D9DDE5, Dark=#2C2C2C}"
                                BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
                                Margin="0,0,0,10">
                             <Frame.Shadow>
-                                <Shadow Brush="#000000" Opacity="{AppThemeBinding Light=0.06, Dark=0.2}" Radius="8" Offset="0,2"/>
+                                <Shadow Brush="#000000"
+                                        Opacity="{AppThemeBinding Light=0.06, Dark=0.2}"
+                                        Radius="8"
+                                        Offset="0,2"/>
                             </Frame.Shadow>
 
                             <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
                                 <Label Text="{Binding Symbol}"
                                        FontAttributes="Bold"
-                                       FontSize="{DynamicResource AppFontSize}" />
+                                       FontSize="{DynamicResource AppFontSize}"
+                                       TextColor="{AppThemeBinding Light=#111111, Dark=#FFFFFF}" />
                                 <Label Grid.Row="1"
                                        Text="{Binding Name}"
-                                       TextColor="#5B6472"
+                                       TextColor="{AppThemeBinding Light=#5B6472, Dark=#AAB2C0}"
                                        FontSize="{DynamicResource AppFontSize}" />
                                 <Label Grid.Column="1"
                                        Grid.RowSpan="2"
                                        Text="›"
                                        FontSize="{DynamicResource AppFontSizeTitle}"
-                                       TextColor="#9AA3AF"
+                                       TextColor="{AppThemeBinding Light=#9AA3AF, Dark=#AAB2C0}"
                                        VerticalOptions="Center" />
 
                                 <Grid.GestureRecognizers>

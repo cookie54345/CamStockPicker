@@ -5,85 +5,91 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="Watchlist">
 
-	<Grid Padding="16" RowDefinitions="Auto,*">
-		<!-- Main Title -->
-		<Label Text="Watchlist"
+    <Grid Padding="16" RowDefinitions="Auto,*">
+        <Label Text="Watchlist"
                FontAttributes="Bold"
-               FontSize="{DynamicResource AppFontSizeTitle}" />
+               FontSize="{DynamicResource AppFontSizeTitle}"
+               TextColor="{AppThemeBinding Light=#111111, Dark=#FFFFFF}" />
 
-		<VerticalStackLayout Grid.Row="1"
+        <VerticalStackLayout Grid.Row="1"
                              VerticalOptions="Center"
                              HorizontalOptions="Center"
                              Spacing="10">
-			<VerticalStackLayout.Triggers>
-				<DataTrigger TargetType="VerticalStackLayout"
+            <VerticalStackLayout.Triggers>
+                <DataTrigger TargetType="VerticalStackLayout"
                              Binding="{Binding Items.Count}"
                              Value="0">
-					<Setter Property="IsVisible" Value="True" />
-				</DataTrigger>
-			</VerticalStackLayout.Triggers>
+                    <Setter Property="IsVisible" Value="True" />
+                </DataTrigger>
+            </VerticalStackLayout.Triggers>
 
-			<VerticalStackLayout.IsVisible>False</VerticalStackLayout.IsVisible>
+            <VerticalStackLayout.IsVisible>False</VerticalStackLayout.IsVisible>
 
-			<Label Text="☆"
+            <Label Text="☆"
                    FontSize="{DynamicResource AppFontSizeBig}"
-                   TextColor="#C7CDD6"
+                   TextColor="{AppThemeBinding Light=#C7CDD6, Dark=#6B7280}"
                    HorizontalTextAlignment="Center" />
-			<Label Text="No favourites yet."
+            <Label Text="No favourites yet."
                    FontSize="{DynamicResource AppFontSize}"
-                   TextColor="#5B6472"
+                   TextColor="{AppThemeBinding Light=#5B6472, Dark=#AAB2C0}"
                    HorizontalTextAlignment="Center" />
-			<Label Text="Add from Detail screen."
+            <Label Text="Add from Detail screen."
                    FontSize="{DynamicResource AppFontSize}"
-                   TextColor="#8A93A3"
+                   TextColor="{AppThemeBinding Light=#8A93A3, Dark=#94A3B8}"
                    HorizontalTextAlignment="Center" />
-		</VerticalStackLayout>
+        </VerticalStackLayout>
 
-		<!-- Active List View -->
-		<CollectionView Grid.Row="1"
+        <CollectionView Grid.Row="1"
                         ItemsSource="{Binding Items}"
-                        SelectionMode="Single"
-                        SelectionChangedCommand="{Binding OpenDetailCommand}"
-                        SelectionChangedCommandParameter="{Binding CurrentSelection[0], Source={RelativeSource Self}}">
-			<CollectionView.Triggers>
-				<DataTrigger TargetType="CollectionView"
+                        SelectionMode="None">
+            <CollectionView.Triggers>
+                <DataTrigger TargetType="CollectionView"
                              Binding="{Binding Items.Count}"
                              Value="0">
-					<Setter Property="IsVisible" Value="False" />
-				</DataTrigger>
-			</CollectionView.Triggers>
+                    <Setter Property="IsVisible" Value="False" />
+                </DataTrigger>
+            </CollectionView.Triggers>
 
-			<CollectionView.ItemTemplate>
-				<DataTemplate>
-					<Frame Padding="14"
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="14"
                            CornerRadius="12"
                            HasShadow="True"
                            BorderColor="{AppThemeBinding Light=#D9DDE5, Dark=#2C2C2C}"
                            BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
                            Margin="0,0,0,10">
-						<Frame.Shadow>
-							<Shadow Brush="#000000" Opacity="{AppThemeBinding Light=0.06, Dark=0.2}" Radius="8" Offset="0,2"/>
-						</Frame.Shadow>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding BindingContext.OpenDetailCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                CommandParameter="{Binding .}" />
+                        </Frame.GestureRecognizers>
 
-						<Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
-							<Label Text="{Binding Symbol}"
+                        <Frame.Shadow>
+                            <Shadow Brush="#000000"
+                                    Opacity="{AppThemeBinding Light=0.06, Dark=0.2}"
+                                    Radius="8"
+                                    Offset="0,2"/>
+                        </Frame.Shadow>
+
+                        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
+                            <Label Text="{Binding Symbol}"
                                    FontAttributes="Bold"
-                                   FontSize="{DynamicResource AppFontSize}" />
-							<Label Grid.Row="1"
+                                   FontSize="{DynamicResource AppFontSize}"
+                                   TextColor="{AppThemeBinding Light=#111111, Dark=#FFFFFF}" />
+                            <Label Grid.Row="1"
                                    Text="{Binding Name}"
-                                   TextColor="#5B6472"
+                                   TextColor="{AppThemeBinding Light=#5B6472, Dark=#AAB2C0}"
                                    FontSize="{DynamicResource AppFontSize}" />
-							<Label Grid.Column="1"
+                            <Label Grid.Column="1"
                                    Grid.RowSpan="2"
                                    Text="›"
                                    FontSize="{DynamicResource AppFontSizeTitle}"
-                                   TextColor="#9AA3AF"
+                                   TextColor="{AppThemeBinding Light=#9AA3AF, Dark=#AAB2C0}"
                                    VerticalOptions="Center" />
-						</Grid>
-					</Frame>
-				</DataTemplate>
-			</CollectionView.ItemTemplate>
-		</CollectionView>
-
-	</Grid>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
 </ContentPage>

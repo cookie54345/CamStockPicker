@@ -11,15 +11,18 @@
             <!-- Header: Symbol + company -->
             <Label Text="{Binding Symbol}"
                    FontAttributes="Bold"
-                   FontSize="{DynamicResource AppFontSizeTitle}" />
+                   FontSize="{DynamicResource AppFontSizeTitle}"
+                   TextColor="{AppThemeBinding Light=#111111, Dark=#FFFFFF}" />
+
             <Label Text="{Binding CompanyName}"
-                   TextColor="#5B6472"
+                   TextColor="{AppThemeBinding Light=#5B6472, Dark=#AAB2C0}"
                    FontSize="{DynamicResource AppFontSize}" />
 
             <!-- Price -->
             <Label Text="{Binding PriceText}"
                    FontAttributes="Bold"
-                   FontSize="{DynamicResource AppFontSizeBig}" />
+                   FontSize="{DynamicResource AppFontSizeBig}"
+                   TextColor="{AppThemeBinding Light=#111111, Dark=#FFFFFF}" />
 
             <!-- Change -->
             <Label Text="{Binding ChangeText}"
@@ -31,10 +34,10 @@
                 <Button Text="Refresh"
                         CornerRadius="12"
                         HeightRequest="50"
-                        BackgroundColor="White"
-                        BorderColor="#D9DDE5"
+                        BackgroundColor="{AppThemeBinding Light=White, Dark=#2A2A2A}"
+                        BorderColor="{AppThemeBinding Light=#D9DDE5, Dark=#444444}"
                         BorderWidth="1"
-                        TextColor="Black"
+                        TextColor="{AppThemeBinding Light=Black, Dark=White}"
                         FontSize="{DynamicResource AppFontSize}"
                         Command="{Binding RefreshCommand}" />
 
@@ -49,52 +52,60 @@
             </Grid>
 
             <!-- Statistics card -->
-            <Frame Padding="14" CornerRadius="12" HasShadow="False" BorderColor="#D9DDE5">
+            <Frame Padding="14"
+                   CornerRadius="12"
+                   HasShadow="False"
+                   BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E1E}"
+                   BorderColor="{AppThemeBinding Light=#D9DDE5, Dark=#444444}">
                 <VerticalStackLayout Spacing="10">
                     <Label Text="Statistics"
                            FontAttributes="Bold"
-                           TextColor="#5B6472"
+                           TextColor="{AppThemeBinding Light=#5B6472, Dark=#E5E7EB}"
                            FontSize="{DynamicResource AppFontSize}" />
 
                     <Grid ColumnDefinitions="*,Auto"
                           RowDefinitions="Auto,Auto,Auto,Auto"
                           RowSpacing="10">
                         <Label Text="Open"
-                               TextColor="#5B6472"
+                               TextColor="{AppThemeBinding Light=#5B6472, Dark=#AAB2C0}"
                                FontSize="{DynamicResource AppFontSize}" />
                         <Label Grid.Column="1"
                                Text="{Binding OpenText}"
                                FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#111111, Dark=#FFFFFF}"
                                FontSize="{DynamicResource AppFontSize}" />
 
                         <Label Grid.Row="1"
                                Text="High"
-                               TextColor="#5B6472"
+                               TextColor="{AppThemeBinding Light=#5B6472, Dark=#AAB2C0}"
                                FontSize="{DynamicResource AppFontSize}" />
                         <Label Grid.Row="1"
                                Grid.Column="1"
                                Text="{Binding HighText}"
                                FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#111111, Dark=#FFFFFF}"
                                FontSize="{DynamicResource AppFontSize}" />
 
                         <Label Grid.Row="2"
                                Text="Low"
-                               TextColor="#5B6472"
+                               TextColor="{AppThemeBinding Light=#5B6472, Dark=#AAB2C0}"
                                FontSize="{DynamicResource AppFontSize}" />
                         <Label Grid.Row="2"
                                Grid.Column="1"
                                Text="{Binding LowText}"
                                FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#111111, Dark=#FFFFFF}"
                                FontSize="{DynamicResource AppFontSize}" />
 
                         <Label Grid.Row="3"
                                Text="Prev Close"
-                               TextColor="#5B6472"
+                               TextColor="{AppThemeBinding Light=#5B6472, Dark=#AAB2C0}"
                                FontSize="{DynamicResource AppFontSize}" />
                         <Label Grid.Row="3"
                                Grid.Column="1"
                                Text="{Binding PrevCloseText}"
                                FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#111111, Dark=#FFFFFF}"
                                FontSize="{DynamicResource AppFontSize}" />
                     </Grid>
                 </VerticalStackLayout>

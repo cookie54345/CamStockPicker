@@ -1,4 +1,8 @@
 ﻿using CamStockPicker.ViewModels;
+#if ANDROID
+using Android.Content.PM;
+using Microsoft.Maui.ApplicationModel;
+#endif
 
 namespace CamStockPicker.Views;
 
@@ -13,6 +17,11 @@ public partial class WatchlistPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
+
+#if ANDROID
+        if (Platform.CurrentActivity is not null)
+            Platform.CurrentActivity.RequestedOrientation = ScreenOrientation.Portrait;
+#endif
 
         if (BindingContext is WatchlistViewModel vm)
             vm.RefreshCommand.Execute(null);
